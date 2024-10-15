@@ -32,7 +32,34 @@ public:
         while (head)
             removeAtHead();
     }
-   
+   void removeAtHead()
+{
+    if (head == nullptr)
+        return;
+    DNode<T>* p = head;
+    head = head->next;
+    if (head)
+        head->prev = nullptr;
+    delete p;
+}
+void removeAtTail()
+{
+    if (head == nullptr)
+        return;
+    if (head->next == nullptr)
+    {
+        delete head;
+        head = nullptr;
+        return;
+    }
+    DNode<T>* p = head;
+    while (p->next != nullptr)
+    {
+        p = p->next;
+    }
+    p->prev->next = nullptr;
+    delete p;
+}
     bool insertAfter(T key, T val)
     {
         if (head == nullptr)
