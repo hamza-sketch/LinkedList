@@ -20,6 +20,7 @@ struct DNode
     DNode(X val) :info(val), next(nullptr), prev(nullptr)
     {}
 };
+
 template<typename T>
 class LDLL
 {
@@ -59,6 +60,33 @@ void removeAtTail()
     }
     p->prev->next = nullptr;
     delete p;
+}
+void insertAtHead(T val)
+{
+    DNode<T>* x = new DNode<T>(val);
+    if (head == nullptr)
+    {
+        head = x;
+        return;
+    }
+    x->next = head;
+    head->prev = x;
+    head = x;
+}
+void insertAtTail(T val)
+{
+    if (head == nullptr)
+    {
+        head = new DNode<T>(val);
+        return;
+    }
+    DNode<T>* p = head;
+    while (p->next != nullptr)
+    {
+        p = p->next;
+    }
+    p->next = new DNode<T>(val);
+    p->next->prev = p;
 }
     bool insertAfter(T key, T val)
     {
